@@ -176,7 +176,7 @@ export class EthHdWallet {
     var child = this._root.deriveChild(num).getWallet()
     this._children.push({
       wallet: child,
-      address: (0, _ethereumjsUtil.addHexPrefix)(child.getAddress().toString('hex'))
+      address: addHexPrefix(child.getAddress().toString('hex'))
     })
     return this._children
   }

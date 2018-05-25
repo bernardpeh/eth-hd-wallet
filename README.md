@@ -13,7 +13,9 @@ Features:
 ## Installation
 
 ```shell
-npm install git://github.com/bernardpeh/eth-hd-wallet
+npm install https://github.com/bernardpeh/eth-hd-wallet
+cd node_modules/eth-hd-wallet
+npm run-script build
 ```
 
 ## API
