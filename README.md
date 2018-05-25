@@ -13,12 +13,7 @@ Features:
 ## Installation
 
 ```shell
-npm install eth-hd-wallet
-```
-Or if using Yarn (we recommend this):
-
-```shell
-yarn add eth-hd-wallet
+npm install git://github.com/bernardpeh/eth-hd-wallet
 ```
 
 ## API
@@ -33,6 +28,18 @@ const wallet = EthHdWallet.fromMnemonic(generateMnemonic())
 console.log( wallet instanceof EthHdWallet ); /* true */
 */
 ```
+
+**generateAddress(): Generating single address**
+
+```js
+// generate 3rd address
+console.log( wallet.generateAddress(2) )
+
+/*
+[
+  '0x1acfb961c5a8268eac8e09d6241a26cbeff42241',
+]
+*/
 
 
 **generateAddresses(): Generating addresses**

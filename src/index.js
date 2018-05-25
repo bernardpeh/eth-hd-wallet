@@ -56,6 +56,17 @@ export class EthHdWallet {
   }
 
   /**
+   * Generate 1 new address.
+   * @param  {Number} num nth new address to generate.
+   * @return {[String]}
+   */
+  generateAddress (num) {
+    const newKey = this._deriveNewKey(num)
+
+    return newKey.map(k => k.address)
+  }
+
+  /**
    * Discard generated addresses.
    *
    * This is in effect the reverse of `generateAddresses()`.
@@ -153,5 +164,20 @@ export class EthHdWallet {
     }
 
     return this._children.slice(-num)
+  }
+
+  /**
+   * Derive 1 new key pair.
+   *
+   * @param  {Number} nth new keypair to generate
+   * @return {[String]} Generated keypairs.
+   */
+  _deriveNewKey (num) {
+    var child = this._root.deriveChild(num).getWallet()
+    this._children.push({
+      wallet: child,
+      address: (0, _ethereumjsUtil.addHexPrefix)(child.getAddress().toString('hex'))
+    })
+    return this._children
   }
 }

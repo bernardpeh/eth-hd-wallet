@@ -1,7 +1,7 @@
 {
   "name": "eth-hd-wallet",
   "version": "0.3.0",
-  "description": "Lightweight Ethereum HD wallet implementation based on BIP-44 standard",
+  "description": "Lightweight Ethereum HD wallet implementation based on BIP-44 standard. Forked from https://github.com/meth-project/eth-hd-wallet",
   "main": "index.js",
   "scripts": {
     "build": "babel --ignore test.js,__fixtures__ --out-dir dist src",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/meth-project/eth-hd-wallet.git"
+    "url": "git+https://github.com/bernardpeh/eth-hd-wallet.git"
   },
   "keywords": [
     "ethereum",
@@ -29,9 +29,9 @@
   "author": "Ramesh Nair <ram@hiddentao.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/meth-project/eth-hd-wallet/issues"
+    "url": "https://github.com/bernardpeh/eth-hd-wallet/issues"
   },
-  "homepage": "https://github.com/meth-project/eth-hd-wallet#readme",
+  "homepage": "https://github.com/bernardpeh/eth-hd-wallet#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
