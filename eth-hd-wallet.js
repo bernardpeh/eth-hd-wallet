@@ -1,7 +1,7 @@
-import { addHexPrefix } from 'ethereumjs-util'
-import { fromExtendedKey } from 'ethereumjs-wallet/hdkey'
-import EthereumTx from 'ethereumjs-tx'
-import Mnemonic from 'bitcore-mnemonic'
+const { addHexPrefix } = require('ethereumjs-util');
+const { fromExtendedKey } = require ('ethereumjs-wallet/hdkey');
+const EthereumTx = require('ethereumjs-tx');
+const Mnemonic = require('bitcore-mnemonic');
 
 
 
@@ -13,7 +13,7 @@ const BIP44_PATH = `m/44'/60'/0'/0`
  * Generate a 12-word mnemonic in English.
  * @return {[String]}
  */
-export const generateMnemonic = () => {
+generateMnemonic = function() {
   return new Mnemonic(Mnemonic.Words.ENGLISH).toString()
 }
 
@@ -21,7 +21,7 @@ export const generateMnemonic = () => {
 /**
  * Represents a wallet instance.
  */
-export class EthHdWallet {
+class EthHdWallet {
   /**
    * Construct HD wallet instance from given mnemonic
    * @param  {String} mnemonic Mnemonic/seed string.
@@ -181,3 +181,5 @@ export class EthHdWallet {
     return this._children
   }
 }
+
+module.exports = { generateMnemonic, EthHdWallet};
