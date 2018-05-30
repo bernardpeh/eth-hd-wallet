@@ -3,11 +3,8 @@ const { fromExtendedKey } = require ('ethereumjs-wallet/hdkey');
 const EthereumTx = require('ethereumjs-tx');
 const Mnemonic = require('bitcore-mnemonic');
 
-
-
 // See https://github.com/ethereum/EIPs/issues/85
 const BIP44_PATH = `m/44'/60'/0'/0`
-
 
 /**
  * Generate a 12-word mnemonic in English.
@@ -16,7 +13,6 @@ const BIP44_PATH = `m/44'/60'/0'/0`
 generateMnemonic = function() {
   return new Mnemonic(Mnemonic.Words.ENGLISH).toString()
 }
-
 
 /**
  * Represents a wallet instance.
@@ -42,7 +38,6 @@ class EthHdWallet {
     this._root = this._hdKey.derivePath(BIP44_PATH)
     this._children = []
   }
-
 
   /**
    * Generate new addresses.
@@ -80,8 +75,6 @@ class EthHdWallet {
     return discard.map(k => k.address)
   }
 
-
-
   /**
    * Get all addresses.
    * @return {[String]}
@@ -90,7 +83,6 @@ class EthHdWallet {
     return this._children.map(k => k.address)
   }
 
-
   /**
    * Get no. of addresses.
    * @return {Number}
@@ -98,7 +90,6 @@ class EthHdWallet {
   getAddressCount () {
     return this._children.map(k => k.address).length
   }
-
 
   /**
    * Check whether given address is present in current list of generated addresses.
@@ -111,11 +102,10 @@ class EthHdWallet {
     return !!this._children.find(({ address }) => addr === address)
   }
 
-
   /**
    * Generate signed transaction for given parameters.
    *
-   * @param  {String} from From address
+   * @param  {String} from From ID
    * @param  {String} [to] If omitted then deploying a contract
    * @param  {Number} value Amount of wei to send
    * @param  {String} data Data
@@ -126,21 +116,15 @@ class EthHdWallet {
    * @return {String} Raw transaction string.
    */
   sign ({ nonce, from, to, value, data, gasLimit, gasPrice, chainId }) {
-    const { wallet } = this._children.find(({ address }) => from === address) || {}
-
-    if (!wallet) {
-      throw new Error('Invalid from address')
-    }
 
     const tx = new EthereumTx({
       nonce, to, value, data, gasLimit, gasPrice, chainId
     })
 
-    tx.sign(wallet.getPrivateKey())
+    tx.sign(this._root.deriveChild(from).getWallet().getPrivateKey())
 
     return addHexPrefix(tx.serialize().toString('hex'))
   }
-
 
   /**
    * Derive new key pairs.

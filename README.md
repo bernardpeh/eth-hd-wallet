@@ -15,6 +15,9 @@ Features:
 ```shell
 npm install https://github.com/bernardpeh/eth-hd-wallet
 npm install
+
+# To run the scripts for example
+# node scripts/createWallet.
 ```
 
 ## API
@@ -143,7 +146,6 @@ console.log( rawTx ) /* "0x...." */
 web3.eth.sendRawTransaction(rawTx, (err) => { ... })
 ```
 
-
 ## Developing
 
 Ensure you have [geth](https://github.com/ethereum/go-ethereum) installed and
@@ -159,18 +161,31 @@ _Note: If you've never installed `geth` before then make
 sure you run `geth makedag 0 ~/.ethash` to generate the DAG needed for mining,
 otherwise the tests will timeout._
 
-## Acknowledgements
-
-Inspired by code from the following great projects:
-
-* https://github.com/ConsenSys/eth-lightwallet
-* https://github.com/MetaMask/eth-hd-keyring
-* https://github.com/trapp/ethereum-bip44
-
 ## References
 
+* https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethsendtransaction
 * https://github.com/ethereum/EIPs/issues/85
 * https://github.com/MetaMask/metamask-extension/issues/640
+
+## Quick Recipes
+```
+# use web3 1.0
+
+# const Utils = require('web3-utils');
+# let txTransfer = {};
+# txTransfer.from = from.address;
+# txTransfer.to = to.address;
+# txTransfer.gas = GasLimit;
+# txTransfer.value = amount;
+# txTransfer.data = Utils.toHex('free text data');
+# web3.eth.sendTransaction(txTransfer);
+
+web3.fromWei(web3.eth.getBalance(web3.eth.coinbase),"ether").toString()
+web3.eth.sendTransaction({from: web3.eth.coinbase, to: 'xx', value: web3.toWei(80,'ether')})
+web3.eth.sendTransaction({from:web3.eth.accounts[0],to:web3.eth.accounts[1],value:web3.toWei(0.1,'ether'),data:web3.toHex('John Doe sent you a message')})
+```
+
+
 
 ## License
 
