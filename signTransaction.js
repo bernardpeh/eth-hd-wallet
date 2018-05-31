@@ -17,13 +17,14 @@ userId = process.argv[2]
 mnemonic = process.argv[3]
 
 const wallet = EthHdWallet.fromMnemonic(mnemonic)
+var nonce_count = web3.eth.getTransactionCount(wallet.generateAddress(userId)[0])
 
 // sending from address 1 to 2
 const rawTx = wallet.sign({
   from: userId,
   to: '0x3db9bad2da382438d510223747be587e4c72056f',
   value: 70000000000000000,
-  nonce: 0x0,
+  nonce: nonce_count,
   gasPrice: 50000000000,
   gasLimit: 21000,
   chainId: 1
