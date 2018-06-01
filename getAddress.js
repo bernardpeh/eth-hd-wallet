@@ -1,3 +1,4 @@
+// this is a test mnemonic
 // mnemonic = 'veteran vehicle super three prefer fringe summer trouble peace gallery movie slogan';
 
 const { generateMnemonic, EthHdWallet } = require('./eth-hd-wallet.js')
