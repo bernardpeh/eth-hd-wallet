@@ -11,7 +11,8 @@ const BIP44_PATH = `m/44'/60'/0'/0`
  * @return {[String]}
  */
 generateMnemonic = function() {
-  return new Mnemonic(Mnemonic.Words.ENGLISH).toString()
+  // lets do a 24 word seed
+  return new Mnemonic(256,Mnemonic.Words.ENGLISH).toString()
 }
 
 /**
